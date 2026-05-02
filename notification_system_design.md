@@ -105,3 +105,26 @@ Caching is fast, but cache invalidation must be handled carefully. Read replicas
 
 ## Next Stage
 Stage 5 will describe a simple asynchronous redesign.
+
+## Stage 5: High-Concurrency Redesign
+
+The synchronous version can become slow when many notifications need to be sent at once. A better approach is to use a message queue.
+
+### Idea
+- Save the notification in the database first.
+- Push each delivery job into a queue.
+- Let background workers send emails or app alerts separately.
+
+### Why It Helps
+This keeps the main request fast and allows failed jobs to be retried without stopping the whole process.
+
+### Small Pseudocode
+```python
+def notify_all_async(student_ids, message):
+  save_to_db_bulk(student_ids, message)
+  for student_id in student_ids:
+    notification_queue.push(student_id, message)
+```
+
+## Next Stage
+Stage 6 will cover priority inbox ordering.
