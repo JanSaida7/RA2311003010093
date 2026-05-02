@@ -2,3 +2,8 @@
 _pdf_pages/
 *.pdf
 __pycache__/
+node_modules/
+auth.py
+register.py
+scheduler_output.txt
+priority_inbox_output.txt
