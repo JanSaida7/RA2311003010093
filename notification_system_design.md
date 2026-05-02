@@ -63,3 +63,19 @@ As volume reaches millions of rows, sequential table scans will cause high laten
 
 ## Next Stage
 Stage 3 will focus on query optimization and indexing.
+
+## Stage 3: Query Optimization
+
+The query below can be slow on a large table:
+
+```sql
+SELECT *
+FROM notifications
+WHERE studentID = 1042 AND isRead = false
+ORDER BY createdAt DESC;
+```
+
+Add an index on `(student_id, is_read, created_at DESC)` to make it faster.
+
+## Next Stage
+Stage 4 will cover simple performance improvements.
