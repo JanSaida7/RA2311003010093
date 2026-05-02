@@ -32,3 +32,34 @@ WebSockets can be used for bidirectional, low-latency communication. Unlike stan
 
 ## Next Stage
 Stage 2 will cover persistent storage design, including the database choice and schema.
+
+## Stage 2: Persistent Storage
+
+### Database Choice
+PostgreSQL is a good choice because of its ACID compliance, which helps keep notification read statuses synchronized reliably.
+
+### DB Schema
+```sql
+CREATE TYPE notification_category AS ENUM ('Event', 'Result', 'Placement');
+
+CREATE TABLE students (
+  id SERIAL PRIMARY KEY,
+  roll_no VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE notifications (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id INT REFERENCES students(id),
+  type notification_category NOT NULL,
+  message TEXT NOT NULL,
+  is_read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Scaling Challenges
+As volume reaches millions of rows, sequential table scans will cause high latency. A practical solution is horizontal sharding by `student_id` to distribute the data load across multiple instances.
+
+## Next Stage
+Stage 3 will focus on query optimization and indexing.
