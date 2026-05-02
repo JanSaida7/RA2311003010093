@@ -128,3 +128,20 @@ def notify_all_async(student_ids, message):
 
 ## Next Stage
 Stage 6 will cover priority inbox ordering.
+
+## Stage 6: Priority Inbox
+
+Notifications can be ordered by importance and recency so the most useful items appear first.
+
+### Simple Rule
+- Placement gets the highest weight.
+- Result comes next.
+- Event has the lowest weight.
+
+### Maintenance
+Use a small min-heap to keep the top 10 notifications without sorting the full list every time.
+
+This gives a fast priority view while still keeping the logic easy to explain and maintain.
+
+## Final Check
+Keep screenshots ready and avoid using your name in the repository title or commit messages.
