@@ -1,0 +1,4 @@
+.venv/
+_pdf_pages/
+*.pdf
+*.md
