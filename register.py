@@ -20,6 +20,9 @@ if response.status_code == 200:
     print(f"ClientID: {creds.get('clientID')}")
     print(f"ClientSecret: {creds.get('clientSecret')}")
     print("\nCRITICAL: Copy and save these now! You cannot retrieve them later.")
+elif response.status_code == 409:
+    print("Account already registered with this email.")
+    print("Use the saved ClientID and ClientSecret to authenticate.")
 else:
     print(f"Registration Failed: {response.status_code}")
     print(response.text)
