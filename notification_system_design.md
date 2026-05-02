@@ -90,3 +90,18 @@ This is better than indexing every column because it targets the exact query pat
 
 ## Next Stage
 Stage 4 will cover simple performance improvements.
+
+## Stage 4: Performance Improvements
+
+Two simple ways to improve speed are caching and read replicas.
+
+- **Redis caching** can store unread counts and the first page of notifications so the app does not hit the database every time.
+- **Read replicas** can handle fetch-heavy traffic while the main database continues handling writes.
+
+These options are useful because notification feeds are usually read more often than they are changed.
+
+### Tradeoff
+Caching is fast, but cache invalidation must be handled carefully. Read replicas reduce load, but they can lag behind the primary database.
+
+## Next Stage
+Stage 5 will describe a simple asynchronous redesign.
