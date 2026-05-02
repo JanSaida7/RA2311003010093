@@ -66,7 +66,7 @@ Stage 3 will focus on query optimization and indexing.
 
 ## Stage 3: Query Optimization
 
-The query below can be slow on a large table:
+The query below can be slow when the notifications table grows large:
 
 ```sql
 SELECT *
@@ -75,7 +75,18 @@ WHERE studentID = 1042 AND isRead = false
 ORDER BY createdAt DESC;
 ```
 
-Add an index on `(student_id, is_read, created_at DESC)` to make it faster.
+It can trigger a table scan because the filter and sort both need support.
+
+### Fix
+Add a composite index on `(student_id, is_read, created_at DESC)` so the database can find unread notifications for one student and return them in order more efficiently.
+
+### Example
+```sql
+CREATE INDEX idx_notifications_student_unread
+ON notifications (student_id, is_read, created_at DESC);
+```
+
+This is better than indexing every column because it targets the exact query pattern.
 
 ## Next Stage
 Stage 4 will cover simple performance improvements.
