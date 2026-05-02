@@ -60,8 +60,13 @@ Use the helper script to fetch a token, run both demos, and print the outputs in
 
 The repository includes PNG outputs for submission evidence:
 
-- `vehicle_maintence_scheduler/scheduler_output.png`
-- `notification_app_be/priority_inbox_output.png`
+### Scheduler Output
+
+![Scheduler output](vehicle_maintence_scheduler/scheduler_output.png)
+
+### Priority Inbox Output
+
+![Priority inbox output](notification_app_be/priority_inbox_output.png)
 
 ## Notification Backend
 
